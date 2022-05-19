@@ -1,0 +1,19 @@
+{
+  "name": "dotenv-sm",
+  "version": "1.0.0",
+  "description": "Generate .env files importing values from AWS secret manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Crowdfarming",
+  "license": "ISC",
+  "dependencies": {
+    "args": "^5.0.3",
+    "aws-sdk": "^2.1138.0",
+    "dotenv": "^16.0.1"
+  },
+  "bin": {
+    "dotenv-sm": "./index.js"
+  }
+}
