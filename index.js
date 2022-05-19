@@ -16,6 +16,7 @@ args
     { name: ['l', 'suffix-length'], description: 'Suffix length', defaultValue: 1 },
     { name: ['k', 'aws-key'], description: 'AWS Key' },
     { name: ['a', 'aws-secret'], description: 'AWS Secret' },
+    { name: ['t', 'tag'], description: 'Secret TAG', defaultValue: '(SECRET_MANAGER)'},
     { name: ['r', 'region'], description: 'AWS Region', defaultValue: 'eu-west-1' },
   ]);
 
@@ -38,9 +39,10 @@ const addConfigs = (data, secrets = {}) => {
   let text = '';
   for (const key in data) {
     const value = data[key];
+    const isTagged = (value === config.tag);
     const isSecret = value.startsWith(SECRET_PREFIX);
-    if (isSecret === true) {
-      const secretKey = value.substr(0, value.length - SECRET_SUFFIX_LENGTH).replace(SECRET_PREFIX, '');
+    if (isSecret || isTagged) {
+      const secretKey = isTagged ? key : value.substr(0, value.length - SECRET_SUFFIX_LENGTH).replace(SECRET_PREFIX, '');
       if (secrets[secretKey] !== undefined) {
         data[key] = secrets[secretKey];
       } else {
