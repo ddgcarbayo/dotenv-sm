@@ -6,8 +6,8 @@ Check de .env.example file
 ### Commands & options
 
 Commands:
-help     Display help
-version  Display version
+- help     Display help
+- version  Display version
 
 Options:
 
